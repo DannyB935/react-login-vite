@@ -1,0 +1,11 @@
+body{
+    background: #13262f;
+}
+
+.cardHover:hover{
+    cursor: pointer;
+}
+
+.iconSizes{
+    font-size: 3.5rem;
+}
