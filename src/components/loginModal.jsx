@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 //*Gets closeModal function by props
-function LogInModal({onClose}) {
+function LogInModal({onClose, onLogin}) {
     //*Use state for login
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -27,9 +27,14 @@ function LogInModal({onClose}) {
         }
 
         const res = await axios.post('http://localhost:5000/api/users/login/', loginUser);
-        console.log(res.data);
-        console.log(username);
-        console.log(password);
+        const data = res.data;
+				//*Store data on session storage (only current tab)
+				sessionStorage.setItem('token', data.token);
+				sessionStorage.setItem('username', data.username);
+				sessionStorage.setItem('rol', data.rol);
+        //*We set the user rol
+        console.log("Modal:", data.rol);
+        onLogin(data.rol);
         onClose();
         }catch(error){
           console.log(error);
@@ -45,11 +50,11 @@ function LogInModal({onClose}) {
         </Modal.Header>
         <Modal.Body>
           
-            <div className="col-12 col-md-6">
+            <div className="col-12">
                 <label htmlFor="username" className="form-label">Username: </label>
                 <input type="text" className='form-control' placeholder='Write your username here!' value={username} onChange={handleUsername}/>
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12">
                 <label htmlFor="password" className="form-label">Password</label>
                 <input type="password" className='form-control' placeholder='Write your password here!' value={password} onChange={handlePassword}/>
             </div>

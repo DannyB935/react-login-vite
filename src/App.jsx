@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -10,6 +10,15 @@ function App() {
   
   const [showModal, setShowModal] = useState(false);
   const [opRegModal, setOpRegModal] = useState(false);
+  const [userRol, setUserRol] = useState(0);
+
+  useEffect(()=>{
+    const userRolStorage = sessionStorage.getItem('rol');
+    if(userRolStorage){
+      //*We set the rol in case it's still existing
+      setUserRol(userRolStorage);
+    }
+  },[userRol]);
 
   const openModal = () =>{
     setShowModal(true);
@@ -25,6 +34,11 @@ function App() {
 
   const closeRegister = ()=>{
     setOpRegModal(false);
+  }
+
+  const handleUserRol = (rol)=>{
+    setUserRol(rol);
+    console.log(userRol);
   }
 
   return (
@@ -44,7 +58,7 @@ function App() {
         </div>
 
         {/* Only shows modal if showModal = true and passes function trough props so modal can handle*/}
-        {showModal && <LogInModal onClose={closeModal}/>}
+        {showModal && <LogInModal onClose={closeModal} onLogin={handleUserRol}/>}
 
         <div className="col-12 col-md-4 ms-1">
         <div className="card text-center h-100 cardHover" onClick={openRegister}>
@@ -60,7 +74,7 @@ function App() {
 
         {opRegModal && <RegisterModal onClose={closeRegister}/>}
 
-        <div className="col-12 col-md-4 ms-1">
+        {userRol == 1 && <div className="col-12 col-md-4 ms-1">
         <div className="card text-center h-100 cardHover">
             <div className="card-body">
               <h5 className="card-title card-header">User list</h5>
@@ -70,7 +84,7 @@ function App() {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
 
     </div>
   );
