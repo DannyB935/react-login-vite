@@ -33,7 +33,6 @@ function LogInModal({onClose, onLogin}) {
 				sessionStorage.setItem('username', data.username);
 				sessionStorage.setItem('rol', data.rol);
         //*We set the user rol
-        console.log("Modal:", data.rol);
         onLogin(data.rol);
         onClose();
         }catch(error){

@@ -9,3 +9,7 @@ body{
 .iconSizes{
     font-size: 3.5rem;
 }
+
+.routerLinks{
+    text-decoration: none;
+}

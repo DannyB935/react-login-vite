@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -38,12 +39,11 @@ function App() {
 
   const handleUserRol = (rol)=>{
     setUserRol(rol);
-    console.log(userRol);
   }
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
-        
+
         <div className="col-12 col-md-4 ms-1">
           {/* When clicked, opens login modal */}
           <div className="card text-center h-100 cardHover" onClick={openModal}>
@@ -74,17 +74,19 @@ function App() {
 
         {opRegModal && <RegisterModal onClose={closeRegister}/>}
 
-        {userRol == 1 && <div className="col-12 col-md-4 ms-1">
-        <div className="card text-center h-100 cardHover">
-            <div className="card-body">
-              <h5 className="card-title card-header">User list</h5>
-              <div className="card-text mt-1">
-                <p>Click to see the users list</p>
-                <i className='bi bi-person-circle iconSizes'></i>
+        {userRol == 1 &&
+          <div className="col-12 col-md-4 ms-1">
+            <Link to={"/usersList"} className="card text-center h-100 cardHover routerLinks">
+              <div className="card-body">
+                <h5 className="card-title card-header">User list</h5>
+                <div className="card-text mt-1">
+                  <p>Click to see the users list</p>
+                  <i className='bi bi-person-circle iconSizes'></i>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
-        </div>}
+        }
 
     </div>
   );
