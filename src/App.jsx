@@ -41,6 +41,12 @@ function App() {
     setUserRol(rol);
   }
 
+  //*Method to log out
+  const logOut = ()=>{
+    sessionStorage.clear();
+    setUserRol(0);
+  }
+
   return (
     <div className="container d-flex flex-wrap justify-content-center align-items-center min-vh-100">
 
@@ -93,6 +99,20 @@ function App() {
                 </div>
               </div>
             </Link>
+          </div>
+        }
+
+        {userRol && 
+          <div className="col-12">
+            <div className="card text-center cardHover" onClick={logOut}>
+              <div className="card-body">
+                <h5 className="card-title card-header">Log Out</h5>
+                <div className="card-text mt-1">
+                  <p>Log out here!</p>
+                  <i className='bi bi-arrow-90deg-up iconSizes'></i>
+                </div>
+              </div>
+            </div>
           </div>
         }
 
