@@ -42,9 +42,9 @@ function App() {
   }
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+    <div className="container d-flex flex-wrap justify-content-center align-items-center min-vh-100">
 
-        <div className="col-12 col-md-4 ms-1">
+        <div className="col-12 col-md-4 ms-0">
           {/* When clicked, opens login modal */}
           <div className="card text-center h-100 cardHover" onClick={openModal}>
             <div className="card-body">
